@@ -1,0 +1,40 @@
+export("as.u_char", "as.u_char_range", "as.u_char_seq")
+
+S3method("[", "u_char")
+S3method("as.character", "u_char")
+S3method("as.data.frame", "u_char")
+S3method("as.integer", "u_char")
+S3method("format", "u_char")
+S3method("print", "u_char")
+
+S3method("[", "u_char_range")
+S3method("as.character", "u_char_range")
+S3method("as.data.frame", "u_char_range")
+S3method("format", "u_char_range")
+S3method("print", "u_char_range")
+
+S3method("[", "u_char_seq")
+S3method("as.character", "u_char_seq")
+S3method("as.data.frame", "u_char_seq")
+S3method("format", "u_char_seq")
+S3method("print", "u_char_seq")
+
+export("n_of_u_chars")
+S3method("n_of_u_chars", "u_char")
+S3method("n_of_u_chars", "u_char_range")
+S3method("n_of_u_chars", "u_char_seq")
+
+export("u_char_match", "%uin%")
+
+export("u_char_from_name",
+       "u_char_info", 
+       "u_char_inspect",
+       "u_char_name",
+       "u_char_properties",
+       "u_char_property")
+## export("u_char_tolower", "u_char_toupper"
+
+export("u_blocks", "u_scripts")
+
+export("Unicode_alpha_tokenizer")
+## export("u_tolower", "u_toupper")
