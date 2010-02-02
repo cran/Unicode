@@ -21,7 +21,7 @@ u_char_property(x, which)
 }
 \value{
   For \code{u_char_info}, a data frame with variables giving the Code
-  (\code{Code}) and the \sQuote{basic} Unicode properties Name, General
+  (\code{Code}) and the \sQuote{basic} Unicode variables Name, General
   Category, Canonical Combining Class, Bidi Class, Decomposition,
   Numeric Value Decimal Digit, Numeric Value Digit, Numeric Value,
   Bidi Mirrored, Unicode 1 Name, ISO Comment, Simple Uppercase Mapping,
@@ -30,15 +30,15 @@ u_char_property(x, which)
   \code{Bidi_Class}.)
 
   For \code{u_char_properties}, a data frame with the values of the
-  specified properties.
+  specified properties, or, if no arguments were given, a character
+  vector with the names of all currently available Unicode character
+  properties.
 
   For \code{u_char_property}, the values of the specified property.
 }
 \note{
   Currently, only the property values of a subset of all Unicode
-  character properties can be obtained.  Use
-  \code{names(Unicode:::u_char_property_db)} to list the properties
-  available in addition to the basic ones.
+  character properties can be obtained.
 }
 \references{
   Unicode Character Database (\url{http://www.unicode.org/ucd/})
@@ -47,4 +47,7 @@ u_char_property(x, which)
 ## When was the Euro sign added to Unicode?
 x <- u_char_from_name("EURO SIGN")
 u_char_property(x, "Age")
+
+## List the currently available Unicode character properties.
+u_char_properties()
 }

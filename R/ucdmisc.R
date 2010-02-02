@@ -21,6 +21,10 @@ function(x)
 ##     y
 ## }
 
+u_named_sequences <-
+function()    
+    UCD_named_sequences
+
 u_scripts <-
 function(x)
 {

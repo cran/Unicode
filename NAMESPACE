@@ -1,23 +1,37 @@
+## basics.R
+
 export("as.u_char", "as.u_char_range", "as.u_char_seq")
 
 S3method("[", "u_char")
 S3method("as.character", "u_char")
 S3method("as.data.frame", "u_char")
 S3method("as.integer", "u_char")
+S3method("as.list", "u_char")
+S3method("c", "u_char")
 S3method("format", "u_char")
 S3method("print", "u_char")
+S3method("rep", "u_char")
+S3method("unique", "u_char")
 
 S3method("[", "u_char_range")
 S3method("as.character", "u_char_range")
 S3method("as.data.frame", "u_char_range")
+S3method("c", "u_char_range")
 S3method("format", "u_char_range")
 S3method("print", "u_char_range")
+S3method("rep", "u_char_range")
+S3method("unique", "u_char_range")
+S3method("unlist", "u_char_range")
 
 S3method("[", "u_char_seq")
 S3method("as.character", "u_char_seq")
 S3method("as.data.frame", "u_char_seq")
+S3method("c", "u_char_seq")
 S3method("format", "u_char_seq")
 S3method("print", "u_char_seq")
+S3method("rep", "u_char_seq")
+S3method("unique", "u_char_seq")
+S3method("unlist", "u_char_seq")
 
 export("n_of_u_chars")
 S3method("n_of_u_chars", "u_char")
@@ -26,15 +40,43 @@ S3method("n_of_u_chars", "u_char_seq")
 
 export("u_char_match", "%uin%")
 
+## casefuns.R
+
+export("u_case_fold")
+S3method("u_case_fold", "default")
+S3method("u_case_fold", "u_char")
+S3method("u_case_fold", "u_char_range")
+S3method("u_case_fold", "u_char_seq")
+
+export("u_to_lower_case")
+S3method("u_to_lower_case", "default")
+S3method("u_to_lower_case", "u_char")
+S3method("u_to_lower_case", "u_char_range")
+S3method("u_to_lower_case", "u_char_seq")
+
+export("u_to_upper_case")
+S3method("u_to_upper_case", "default")
+S3method("u_to_upper_case", "u_char")
+S3method("u_to_upper_case", "u_char_range")
+S3method("u_to_upper_case", "u_char_seq")
+
+export("u_to_title_case")
+S3method("u_to_title_case", "u_char")
+
+## charfuns.R
+
 export("u_char_from_name",
        "u_char_info", 
        "u_char_inspect",
+       "u_char_label",       
        "u_char_name",
        "u_char_properties",
        "u_char_property")
-## export("u_char_tolower", "u_char_toupper"
 
-export("u_blocks", "u_scripts")
+## strfuns.R
 
-export("Unicode_alpha_tokenizer")
-## export("u_tolower", "u_toupper")
+export("Unicode_alphabetic_tokenizer")
+
+## ucdmisc.R
+
+export("u_blocks", "u_named_sequences", "u_scripts")

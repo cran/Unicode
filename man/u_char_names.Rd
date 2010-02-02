@@ -1,19 +1,21 @@
 \name{u_char_names}
 \alias{u_char_name}
 \alias{u_char_from_name}
+\alias{u_char_label}
 \title{Unicode Character Names}
 \description{
-  Find the names of Unicode characters, or Unicode characters by their
-  name.
+  Find the names or labels of Unicode characters, or Unicode characters
+  by their name.
 }
 \usage{
 u_char_name(x)
 u_char_from_name(x, type = c("exact", "grep"), ...)
+u_char_label(x)
 }
 \arguments{
   \item{x}{an \R object which can be coerced to a \code{\link{u_char}}
     vector of Unicode characters via \code{\link{as.u_char}} for
-    \code{u_char_name};
+    \code{u_char_name} and \code{u_char_label};
     a character vector otherwise.
   }
   \item{type}{one of \code{"exact"} or \code{"grep"}, or an abbreviation
@@ -24,14 +26,20 @@ u_char_from_name(x, type = c("exact", "grep"), ...)
   }
 }
 \details{
+  The Unicode Standard provides a convention for labeling code points
+  that do not have character names (control, reserved, noncharacter,
+  private-use and surrogate code points).  These labels can be obtained
+  by \code{u_char_label}.
+  
   By default, exact matching is used for finding Unicode characters by
   name.  When \code{type = "grep"}, \code{\link{grepl}} is used for
   matching \code{x} against the Unicode character names; for now, Hangul
   syllable and CJK Unified Ideograph names are ignored in this case.
 }
 \value{
-  For \code{u_char_name}, a character vector with the names of the
-  corresponding Unicode characters.
+  For \code{u_char_name} and \code{u_char_label}, a character vector
+  with the names or labels, respectively, of the corresponding Unicode
+  characters.
 
   For \code{u_char_from_name}, a \code{\link{u_char}} object giving the
   Unicode characters with name exactly matching the given names.

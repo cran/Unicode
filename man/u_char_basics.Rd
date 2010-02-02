@@ -53,8 +53,8 @@ as.u_char_seq(x, sep = NA_character_)
   characters via \code{as.u_char}.
 
   All classes currently have \code{as.character}, \code{as.data.frame},
-  \code{format}, \code{print} and \code{[} subscript methods.  More
-  methods will be added eventually.
+  \code{c}, \code{format}, \code{print}, \code{rep}, \code{unique} and
+  \code{[} subscript methods.  More methods will be added eventually.
 }
 \value{
   For \code{as.u_char}, a \code{u_char} object giving a vector of
