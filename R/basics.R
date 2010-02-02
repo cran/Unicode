@@ -5,16 +5,16 @@ function(x) {
     if(inherits(x, "u_char"))
         return(x)
     if(inherits(x, "u_char_seq"))
-        x <- unlist(x)
+        x <- unlist(unclass(x))
     else if(inherits(x, "u_char_range"))
-        x <- unlist(lapply(x, function(e)
+        x <- unlist(lapply(unclass(x), function(e)
                            if(length(e) == 1L) e else seq(e[1L], e[2L]))
                     )
     if(is.double(x) && (x == as.integer(x)))
         x <- as.integer(x)
     if(is.character(x))
         x <- hex(sub("^U\\+", "", x))
-    if(is.integer(x) && all(is.na(x) | ((x >= 0L) & (x < 2 ^ 21))))
+    if(is.integer(x) && all(is.na(x) | ((x >= 0L) & (x <= U_max))))
         return(.structure(x, class = "u_char"))
     stop("'x' cannot be coerced to u_char.")
 }
@@ -39,6 +39,16 @@ as.integer.u_char <-
 function(x, ...)
     unclass(x)
 
+as.list.u_char <-
+function(x, ...)
+    lapply(seq_along(x), function(i) x[i])
+
+c.u_char <-
+function(..., recursive = FALSE)
+{
+    as.u_char(unlist(lapply(list(...), as.u_char)))
+}
+
 format.u_char <-
 function(x, ...)
 {
@@ -52,6 +62,14 @@ function(x, ...)
     print(noquote(format(x)), ...)
     invisible(x)
 }
+
+rep.u_char <-
+function(x, times, ...)
+    as.u_char(NextMethod("rep"))
+
+unique.u_char <-
+function(x, incomparables = FALSE, ...)
+    as.u_char(NextMethod("unique"))
 
 ## A simple class for Unicode character ranges.
 
@@ -94,10 +112,23 @@ function(x, ...)
 as.data.frame.u_char_range <-
     as.data.frame.vector
 
+## as.list.u_char_range <-
+## function(x, ...)
+##     lapply(seq_along(x), function(i) x[i])
+
+c.u_char_range <-
+function(..., recursive = FALSE)
+{
+    ## Not quite perfect ...
+    as.u_char_range(unlist(lapply(list(...),
+                                  function(e)
+                                  format(as.u_char_range(e)))))
+}
+
 format.u_char_range <-
 function(x, ...)
 {
-    .structure(as.character(sapply(x, paste, collapse = "..")),
+    .structure(as.character(sapply(unclass(x), paste, collapse = "..")),
                names = names(x))
 }
     
@@ -108,6 +139,24 @@ function(x, ...)
     invisible(x)
 }
 
+rep.u_char_range <-
+function(x, times, ...)
+{
+    x <- format(x)
+    as.u_char_range(NextMethod("rep"))
+}
+
+unique.u_char_range <-
+function(x, incomparables = FALSE, ...)
+{
+    x <- format(x)
+    as.u_char_range(NextMethod("unique"))
+}
+
+unlist.u_char_range <-
+function(x, recursive = TRUE, use.names = TRUE)
+    as.u_char(x)
+
 ## A simple class for Unicode character sequences.
 
 as.u_char_seq <-
@@ -116,6 +165,7 @@ function(x, sep = NA_character_)
     if(inherits(x, "u_char_seq"))
         return(x)
     if(inherits(x, "u_char_range")) {
+        x <- unclass(x)
         ind <- as.logical(sapply(x, length) == 2L)
         x[ind] <- lapply(x[ind],
                          function(e) as.u_char(seq.int(e[1L], e[2L],
@@ -159,10 +209,21 @@ function(x, ...)
 as.data.frame.u_char_seq <-
     as.data.frame.vector
 
+## as.list.u_char_seq <-
+## function(x, ...)
+##     lapply(seq_along(x), function(i) x[i])
+
+c.u_char_seq <-
+function(..., recursive = FALSE)
+{
+    as.u_char_seq(unlist(lapply(list(...), as.u_char_seq),
+                         recursive = FALSE))
+}
+
 format.u_char_seq <-
 function(x, ...)
 {
-    .structure(sprintf("<%s>", sapply(x, paste, collapse = ",")),
+    .structure(sprintf("<%s>", sapply(unclass(x), paste, collapse = ",")),
                names = names(x))
 }
     
@@ -172,6 +233,18 @@ function(x, ...)
     print(noquote(format(x)), ...)
     invisible(x)
 }
+
+rep.u_char_seq <-
+function(x, times, ...)
+    as.u_char_seq(NextMethod("rep"))
+
+unique.u_char_seq <-
+function(x, incomparables = FALSE, ...)
+    as.u_char_seq(NextMethod("unique"))
+
+unlist.u_char_seq <-
+function(x, recursive = TRUE, use.names = TRUE)
+    as.u_char(x)
 
 ## A generic for counting the number of Unicode characters in Unicode
 ## character data objects.
@@ -188,13 +261,13 @@ n_of_u_chars.u_char_range <-
 function(x)
 {
     if(!length(x)) return(integer())
-    mat <- sapply(x, range)
+    mat <- sapply(unclass(x), range)
     mat[2L, ] - mat[1L, ] + 1L
 }
 
 n_of_u_chars.u_char_seq <-
 function(x)
-    as.integer(sapply(x, length))
+    as.integer(sapply(unclass(x), length))
 
 ## A helper function for turning hex codes to integers.
 
@@ -208,7 +281,7 @@ hex <- if(getRversion() >= "2.11.0") {
 } else {
     function(x) {
         y <- rep.int(NA_integer_, length(x))
-        re <- "^(0x)?([0123456789abcdeABCDE]+)$"
+        re <- "^(0x)?([0123456789abcdeABCDEF]+)$"
         ind <- grepl(re, x)
         y[ind] <-
             as.integer(sapply(parse(text = sub(re, "0x\\2", x[ind])),
@@ -217,6 +290,9 @@ hex <- if(getRversion() >= "2.11.0") {
         y
     }
 }
+
+## Unicode codespace ranges from U+0000 to U+10FFFF.
+U_max <- hex("10FFFF")
 
 ## Matching
 
@@ -230,7 +306,7 @@ function(x, table, nomatch = NA_integer_)
     ## <FIXME>
     ## Maybe eventually "improve" by handling the length one cases
     ## directly, but even
-    lens <- sapply(table, length)
+    lens <- sapply(unclass(table), length)
     ## takes a lot of time.
     ## Remember that we decided not to use a lo/hi matrix representation
     ## for u_char_range objects because getting this into a data frame

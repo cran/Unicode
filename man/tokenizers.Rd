@@ -1,8 +1,11 @@
 \name{tokenizers}
-\alias{Unicode_alpha_tokenizer}
-\title{Unicode Alpha Tokenizer}
+\alias{Unicode_alphabetic_tokenizer}
+\title{Unicode Alphabetic Tokenizer}
 \description{
   A simple Unicode alphabetic tokenizer.
+}
+\usage{
+Unicode_alphabetic_tokenizer(x)
 }
 \arguments{
   \item{x}{a character vector.}
@@ -10,8 +13,8 @@
 \details{
   Tokenization first replaces the elements of \code{x} by their Unicode
   character sequences.  Then, the non-alphabetic characters (i.e., the
-  ones with a Unicode general category other than `Letter') are replaced
-  by blanks, and the corresponding strings are split according to the
+  ones which do not have the Alphabetic property) are replaced by
+  blanks, and the corresponding strings are split according to the
   blanks.
 }
 \value{

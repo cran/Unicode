@@ -1,20 +1,29 @@
 u_char_decomposition <-
 function(x)
 {
+    ## For now, this really gives the Decomposition_Mapping property.
+    ## Ideally, this should have a type argument controlling whether to
+    ## perform canonical or compatibility decomposition, and most likely
+    ## also an argument controlling whether to decompose recursively or
+    ## not.
+
+    ## Maybe return a u_char_seq eventually?
+    
     x <- as.u_char(x)
     ## Could make this more efficient eventually ...
     p <- match(x, UCD_Unicode_data_table$Code)
-    y <- UCD_Unicode_data_table$Name[p]
+    y <- sub(".*> *", "", UCD_Unicode_data_table$Decomposition[p])
     p <- which(is.na(p))
     if(length(p)) {
         r <- u_char_match(x[p], UCD_Unicode_data_range$Range, 0L)
         ind <- r == 5L                  # Hangul
         if(any(ind)) {
             pos <- p[ind]
-            ## <FIXME>
-            ## For now, do not give decompositions as u_char_seq as not
-            ## all decompositions are such (<font> et al ...)
-            y[pos] <- format(.u_char_decomposition_Hangul(x[pos]))
+            y[pos] <-
+                gsub("U+", "",
+                     sapply(unclass(.u_char_decomposition_Hangul(x[pos])),
+                            paste, collapse = " "),
+                     fixed = TRUE)
         }
         ind <- (r > 0L) & (r != 5L)
         if(any(ind)) {
@@ -109,7 +118,7 @@ function(x)
         y[p, ] <- UCD_Unicode_data_range[r, -1L]
         ## Not quite efficient ...
         y$Name[p] <- u_char_name(x[p])
-        ## Call directly for effciency ...
+        ## Call directly for efficiency ...
         y$Decomposition[q] <-
             format(.u_char_decomposition_Hangul(x[q]))
     }
@@ -124,6 +133,41 @@ function(x)
                Name = u_char_name(x),
                Char = intToUtf8(x, multiple = TRUE),
                stringsAsFactors = FALSE)
+}
+
+u_char_label <-
+function(x)
+{
+    x <- as.u_char(x)
+    ## Use the name by default.
+    y <- u_char_name(x)
+    ## Need to special case the ones with empty or missing names.
+    p <- which(is.na(y) | (y == ""))
+    if(length(p)) {
+        ## Handle surrogate, private use and control characters.
+        r <- u_char_match(x[p], 
+                          c(UCD_Unicode_data_range$Range[-(1L : 5L)],
+                            "0000..001F", "007F..009F"),
+                          0L)
+        q <- p[(r > 0L) & (r <= 3L)]
+        y[q] <- sprintf("surrogate-%04X", x[q])
+        q <- p[(r > 3L) & (r <= 6L)]
+        y[q] <- sprintf("private-use-%04X", x[q])
+        q <- p[(r > 6L) & (r <= 8L)]
+        y[q] <- sprintf("control-%04X", x[q])
+        ## This leaves non-characters and reserved code points.
+        q <- p[r == 0L]
+        if(length(q)) {
+            y[q] <-
+                ifelse(u_char_property(x[q],
+                                       "Noncharacter_Code_Point") ==
+                       "Yes",
+                       sprintf("noncharacter-%04X", x[q]),
+                       sprintf("reserved-%04X", x[q]))
+        }
+    }
+        
+    y
 }
 
 u_char_name <-
@@ -179,6 +223,15 @@ function()
 u_char_properties <-
 function(x, which)
 {
+    if(nargs() == 0L) {
+        ## As a convenience, list available properties if no arguments
+        ## were given.
+        return(sort(intersect(u_char_property_names(),
+                              c(names(UCD_Unicode_data_table),
+                                names(u_char_property_db),
+                                names(u_char_property_getter_db)))))
+    }
+    
     x <- as.u_char(x)
     which <- .expand_property_aliases(as.character(which))
     all_property_names <- u_char_property_names()
@@ -222,6 +275,9 @@ function(x, which)
     
 u_char_property_getter_db <- list()
 
+u_char_property_getter_db$Decomposition_Mapping <-
+    u_char_decomposition
+
 u_char_property <-
 function(x, which)
 {
@@ -256,22 +312,6 @@ function(x)
                       x))
 }
     
-u_char_tolower <-
-function(x)
-{
-    x <- as.u_char(x)
-    m <- u_char_property(x, "Simple_Lowercase_Mapping")
-    ifelse(m == "", x, as.u_char(m))
-}
-
-u_char_toupper <-
-function(x)
-{
-    x <- as.u_char(x)
-    m <- u_char_property(x, "Simple_Uppercase_Mapping")
-    ifelse(m == "", x, as.u_char(m))
-}
-
 ## See Section 3.12 of the Unicode Standard.
 
 Jamo <-
