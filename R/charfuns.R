@@ -238,7 +238,8 @@ function(x, which)
     p <- match(which, all_property_names)
     if(any(ina <- is.na(p))) {
         warning(gettextf("Cannot map %s to Unicode properties",
-                         paste(which[ina], collapse = ", ")))
+                         paste(which[ina], collapse = ", ")),
+                domain = NA)
         which <- which[!ina]
         p <- p[!ina]
     }
@@ -282,7 +283,8 @@ u_char_property <-
 function(x, which)
 {
     if(length(which <- as.character(which)) != 1L)
-        stop(gettextf("Invalid '%s' argument.", "which"))
+        stop(gettextf("Invalid '%s' argument.", "which"),
+             domain = NA)
     u_char_properties(x, which)[[1L]]
 }
 

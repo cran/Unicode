@@ -1,3 +1,5 @@
+importFrom("utils", "browseURL")
+
 ## basics.R
 
 export("as.u_char", "as.u_char_range", "as.u_char_seq")

@@ -57,7 +57,8 @@ function(x)
 function(x, which)
 {
     if(length(which <- as.character(which)) != 1L)
-        stop(gettextf("Invalid '%s' argument.", "which"))
+        stop(gettextf("Invalid '%s' argument.", "which"),
+             domain = NA)
     which <- .expand_property_aliases(which)
     hash <- UCD_property_value_aliases_hash_list[[which]]
     p <- match(x, names(hash), 0L)
