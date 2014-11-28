@@ -301,12 +301,12 @@ function(x, table, nomatch = NA_integer_)
 {
     ## Match u_char x against a u_char_range table.
     x <- as.u_char(x)
-    table <- as.u_char_range(table)
+    table <- unclass(as.u_char_range(table))
     y <- rep.int(nomatch, length(x))
     ## <FIXME>
     ## Maybe eventually "improve" by handling the length one cases
     ## directly, but even
-    lens <- sapply(unclass(table), length)
+    lens <- sapply(table, length)
     ## takes a lot of time.
     ## Remember that we decided not to use a lo/hi matrix representation
     ## for u_char_range objects because getting this into a data frame

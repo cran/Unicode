@@ -1,10 +1,10 @@
-d73d2146382b59336dded28ffb9050a0 *DESCRIPTION
+85409715605e358a1a2499bf7256c1a3 *DESCRIPTION
 b51babd99f0e286d19624261cb5df830 *NAMESPACE
-d5f9de037d8d9cc30aa994a7aa9d0019 *R/basics.R
+a8b30017fe65d2850439b4a00c55df6c *R/basics.R
 f0e3ec14b774b82b7957f0d984b4d9c8 *R/casefuns.R
-55fc394d5ca638e9a2ae93594fbf4ca5 *R/charfuns.R
+11f06d654442e860620d2d4bc24c3b68 *R/charfuns.R
 7a86b8f12a01a9c25f53a226bc816afa *R/strfuns.R
-b9fbce714bdcef39cbf0d95def60b0b9 *R/sysdata.rda
+33d1dd98a213b08addab33503f802e7e *R/sysdata.rda
 2af14e6801f0b7797dc39b41cd496cd5 *R/ucdmisc.R
 c5f047ac996114b31fa759b57e266780 *man/casefuns.Rd
 06b7a306def215a0ba916dca2ec37bd4 *man/n_of_u_chars.Rd
@@ -13,7 +13,7 @@ c5f047ac996114b31fa759b57e266780 *man/casefuns.Rd
 7d0c2b2e17cc3b33439c46deb4b7940e *man/u_char_basics.Rd
 06b10edfa08d91bcd77e112ebe9b2569 *man/u_char_inspect.Rd
 4884d7565f804200fe570ed0f06fc857 *man/u_char_match.Rd
-8f9c998cc1d9e5515c90a313adfaafad *man/u_char_names.Rd
+8fd05d0fa55dd8a5635f489e87ff4ed1 *man/u_char_names.Rd
 cd690c6be172c885b07868c34452096a *man/u_char_properties.Rd
 7c83ccaf764d956fd68d222f79b337ea *man/u_named_sequences.Rd
 398084f57464901f3521823802ae684f *man/u_scripts.Rd

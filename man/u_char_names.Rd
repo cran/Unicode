@@ -55,7 +55,7 @@ x
 u_char_from_name(x)
 
 ## Find all Unicode characters with name matching 'DIGIT ONE'.
-x <- u_char_from_name("\\bDIGIT ONE\\b", "g")
+x <- u_char_from_name("\\\\bDIGIT ONE\\\\b", "g")
 ## And show their names.
 u_char_name(x)
 }

@@ -16,7 +16,7 @@ function(x)
     p <- which(is.na(p))
     if(length(p)) {
         r <- u_char_match(x[p], UCD_Unicode_data_range$Range, 0L)
-        ind <- r == 5L                  # Hangul
+        ind <- (r == UCD_Unicode_data_range_pos_Hangul)
         if(any(ind)) {
             pos <- p[ind]
             y[pos] <-
@@ -25,7 +25,7 @@ function(x)
                             paste, collapse = " "),
                      fixed = TRUE)
         }
-        ind <- (r > 0L) & (r != 5L)
+        ind <- (r > 0L) & (r != UCD_Unicode_data_range_pos_Hangul)
         if(any(ind)) {
             y[p[ind]] <- ""
         }
@@ -113,7 +113,7 @@ function(x)
     p <- which(is.na(p))
     if(length(p)) {
         r <- u_char_match(x[p], UCD_Unicode_data_range$Range, 0L)
-        q <- p[r == 5L]
+        q <- p[r == UCD_Unicode_data_range_pos_Hangul]
         p <- p[r > 0L]
         y[p, ] <- UCD_Unicode_data_range[r, -1L]
         ## Not quite efficient ...
@@ -146,9 +146,14 @@ function(x)
     if(length(p)) {
         ## Handle surrogate, private use and control characters.
         r <- u_char_match(x[p], 
-                          c(UCD_Unicode_data_range$Range[-(1L : 5L)],
+                          c(UCD_Unicode_data_range$Range[-(1L : UCD_Unicode_data_range_pos_Hangul)],
                             "0000..001F", "007F..009F"),
                           0L)
+        ## <FIXME>
+        ## This hard-wires the positions of surrogate and private use
+        ## character ranges.  Ideally, we would compute these (e.g.,
+        ## from the rownames of UCD_Unicode_data_range).
+        ## </FIXME>
         q <- p[(r > 0L) & (r <= 3L)]
         y[q] <- sprintf("surrogate-%04X", x[q])
         q <- p[(r > 3L) & (r <= 6L)]
@@ -182,17 +187,18 @@ function(x)
         range <- UCD_Unicode_data_range$Range
         nomatch <- length(range) + 1L
         r <- u_char_match(x[p], range, nomatch)
-        ind <- r <= 4L                  # CJK
+        ph <- UCD_Unicode_data_range_pos_Hangul
+        ind <- r < ph                   # CJK
         if(any(ind)) {
             pos <- p[ind]
             y[pos] <- .u_char_name_CJK(x[pos])
         }
-        ind <- r == 5L                  # Hangul
+        ind <- r == ph                  # Hangul
         if(any(ind)) {
             pos <- p[ind]
             y[pos] <- .u_char_name_Hangul(x[pos])
         }
-        ind <- (r > 5L) & (r < nomatch)
+        ind <- (r > ph) & (r < nomatch)
         if(any(ind)) {
             y[p[ind]] <- ""
         }
