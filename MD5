@@ -1,10 +1,10 @@
-85409715605e358a1a2499bf7256c1a3 *DESCRIPTION
+bdaee7cf79ee64b50d15d05c8f4afccc *DESCRIPTION
 b51babd99f0e286d19624261cb5df830 *NAMESPACE
 a8b30017fe65d2850439b4a00c55df6c *R/basics.R
 f0e3ec14b774b82b7957f0d984b4d9c8 *R/casefuns.R
 11f06d654442e860620d2d4bc24c3b68 *R/charfuns.R
 7a86b8f12a01a9c25f53a226bc816afa *R/strfuns.R
-33d1dd98a213b08addab33503f802e7e *R/sysdata.rda
+bdf14fede7db4ab5685fcb0e60e6f969 *R/sysdata.rda
 2af14e6801f0b7797dc39b41cd496cd5 *R/ucdmisc.R
 c5f047ac996114b31fa759b57e266780 *man/casefuns.Rd
 06b7a306def215a0ba916dca2ec37bd4 *man/n_of_u_chars.Rd
