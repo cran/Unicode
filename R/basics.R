@@ -8,7 +8,7 @@ function(x) {
         x <- unlist(unclass(x))
     else if(inherits(x, "u_char_range"))
         x <- unlist(lapply(unclass(x), function(e)
-                           if(length(e) == 1L) e else seq(e[1L], e[2L]))
+                           if(length(e) == 1L) e else seq.int(e[1L], e[2L]))
                     )
     if(is.double(x) && (x == as.integer(x)))
         x <- as.integer(x)
@@ -166,7 +166,7 @@ function(x, sep = NA_character_)
         return(x)
     if(inherits(x, "u_char_range")) {
         x <- unclass(x)
-        ind <- as.logical(sapply(x, length) == 2L)
+        ind <- as.logical(lengths(x) == 2L)
         x[ind] <- lapply(x[ind],
                          function(e) as.u_char(seq.int(e[1L], e[2L],
                                                        1L)))
@@ -267,7 +267,7 @@ function(x)
 
 n_of_u_chars.u_char_seq <-
 function(x)
-    as.integer(sapply(unclass(x), length))
+    as.integer(lengths(unclass(x)))
 
 ## A helper function for turning hex codes to integers.
 
@@ -306,7 +306,7 @@ function(x, table, nomatch = NA_integer_)
     ## <FIXME>
     ## Maybe eventually "improve" by handling the length one cases
     ## directly, but even
-    lens <- sapply(table, length)
+    lens <- lengths(table)
     ## takes a lot of time.
     ## Remember that we decided not to use a lo/hi matrix representation
     ## for u_char_range objects because getting this into a data frame

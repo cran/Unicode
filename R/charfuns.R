@@ -298,7 +298,7 @@ function(x, which)
 function(x, which)
 {
     db <- u_char_property_db[[which]]
-    y <- rep(db$Default, length(x))
+    y <- rep.int(db$Default, length(x))
     p <- u_char_match(x, db$Table[[1L]], 0L)
     y[p > 0L] <- db$Table[[2L]][p]
     .expand_property_value_aliases(y, which)
