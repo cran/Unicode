@@ -1,0 +1,41 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Unicode 9.0.0-1\n"
+"POT-Creation-Date: 2017-08-12 22:22\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+
+msgid "'x' cannot be coerced to u_char."
+msgstr ""
+
+msgid "'x' cannot be coerced to u_char_range."
+msgstr ""
+
+msgid "'x' cannot be coerced to u_char_seq."
+msgstr ""
+
+msgid "Cannot map %s to Unicode properties"
+msgstr ""
+
+msgid "Obtaining the following properties is not yet implemented:"
+msgstr ""
+
+msgid ","
+msgstr ""
+
+msgid "Invalid '%s' argument."
+msgstr ""
+
+msgid "Nothing to show."
+msgstr ""
+
+msgid "Can only show one glyph."
+msgstr ""
+
+msgid "Invalid 'x'."
+msgstr ""
