@@ -10,7 +10,7 @@ function(x) {
         x <- unlist(lapply(unclass(x), function(e)
                            if(length(e) == 1L) e else seq.int(e[1L], e[2L]))
                     )
-    if(is.double(x) && (x == as.integer(x)))
+    if(is.double(x) && all(x == as.integer(x)))
         x <- as.integer(x)
     if(is.character(x))
         x <- hex(sub("^U\\+", "", x))
