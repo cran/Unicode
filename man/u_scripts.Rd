@@ -22,7 +22,7 @@ u_scripts(x)
   characters.
 } 
 \references{
-  Unicode Character Database (\url{http://www.unicode.org/ucd/})
+  Unicode Character Database (\url{https://www.unicode.org/ucd/})
 }
 \examples{
 scripts <- u_scripts()

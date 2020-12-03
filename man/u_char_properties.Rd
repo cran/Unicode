@@ -41,7 +41,7 @@ u_char_property(x, which)
   character properties can be obtained.
 }
 \references{
-  Unicode Character Database (\url{http://www.unicode.org/ucd/})
+  Unicode Character Database (\url{https://www.unicode.org/ucd/})
 }
 \examples{
 ## When was the Euro sign added to Unicode?

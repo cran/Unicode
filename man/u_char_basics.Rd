@@ -67,8 +67,8 @@ as.u_char_seq(x, sep = NA_character_)
   vector of Unicode character sequences.
 }
 \references{
-  Unicode Character Database (\url{http://www.unicode.org/ucd/}),\cr
-  \url{http://en.wikipedia.org/wiki/Unicode}
+  Unicode Character Database (\url{https://www.unicode.org/ucd/}),\cr
+  \url{https://en.wikipedia.org/wiki/Unicode}
 }
 \examples{
 x <- as.u_char_range(c("00AA..00AC", "01CC"))

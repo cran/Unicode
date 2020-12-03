@@ -22,5 +22,5 @@ u_blocks(x)
   characters.
 } 
 \references{
-  Unicode Character Database (\url{http://www.unicode.org/ucd/})
+  Unicode Character Database (\url{https://www.unicode.org/ucd/})
 }
