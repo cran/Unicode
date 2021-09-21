@@ -21,8 +21,8 @@ function(x)
             pos <- p[ind]
             y[pos] <-
                 gsub("U+", "",
-                     sapply(unclass(.u_char_decomposition_Hangul(x[pos])),
-                            paste, collapse = " "),
+                     vapply(unclass(.u_char_decomposition_Hangul(x[pos])),
+                            paste, "", collapse = " "),
                      fixed = TRUE)
         }
         ind <- (r > 0L) & (r != UCD_Unicode_data_range_pos_Hangul)
@@ -215,9 +215,9 @@ function(x)
 function(x)
 {
     s <- .u_char_decomposition_Hangul(x)
-    L <- Jamo$L[sapply(s, `[`, 1L) - Jamo_L_base + 1L]
-    V <- Jamo$V[sapply(s, `[`, 2L) - Jamo_V_base + 1L]
-    T <- Jamo$T[sapply(s, `[`, 3L) - Jamo_T_base + 1L]
+    L <- Jamo$L[vapply(s, `[`, 0, 1L) - Jamo_L_base + 1L]
+    V <- Jamo$V[vapply(s, `[`, 0, 2L) - Jamo_V_base + 1L]
+    T <- Jamo$T[vapply(s, `[`, 0, 3L) - Jamo_T_base + 1L]
     T[is.na(T)] <- ""
     sprintf("HANGUL SYLLABLE %s%s%s", L, V, T)
 }

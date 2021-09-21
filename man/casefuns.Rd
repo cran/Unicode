@@ -52,9 +52,9 @@ u_case_fold(x)
 x <- as.u_char(as.u_char_range("0041..005A"))
 ## In case we did not know the code points, we could use e.g.
 x <- as.u_char(utf8ToInt(paste(LETTERS, collapse = "")))
-sapply(x, intToUtf8)
+vapply(x, intToUtf8, "")
 ## Unicode character method:
-sapply(u_to_lower_case(x), intToUtf8)
+vapply(u_to_lower_case(x), intToUtf8, "")
 ## Default method:
 u_to_lower_case(LETTERS)
 

@@ -24,5 +24,5 @@ x <- u_scripts(c("Latn", "Cyrl"))
 n <- lapply(x, n_of_u_chars)
 n
 ## Total number:
-sapply(n, sum)
+vapply(n, sum, 0)
 }

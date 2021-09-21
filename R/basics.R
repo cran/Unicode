@@ -128,7 +128,7 @@ function(..., recursive = FALSE)
 format.u_char_range <-
 function(x, ...)
 {
-    .structure(as.character(sapply(unclass(x), paste, collapse = "..")),
+    .structure(as.character(vapply(unclass(x), paste, "", collapse = "..")),
                names = names(x))
 }
     
@@ -223,7 +223,7 @@ function(..., recursive = FALSE)
 format.u_char_seq <-
 function(x, ...)
 {
-    .structure(sprintf("<%s>", sapply(unclass(x), paste, collapse = ",")),
+    .structure(sprintf("<%s>", vapply(unclass(x), paste, "", collapse = ",")),
                names = names(x))
 }
     
@@ -261,7 +261,7 @@ n_of_u_chars.u_char_range <-
 function(x)
 {
     if(!length(x)) return(integer())
-    mat <- sapply(unclass(x), range)
+    mat <- do.call(cbind, lapply(unclass(x), range))
     mat[2L, ] - mat[1L, ] + 1L
 }
 
@@ -271,24 +271,13 @@ function(x)
 
 ## A helper function for turning hex codes to integers.
 
-hex <- if(getRversion() >= "2.11.0") {
-    function(x) {
-        y <- rep.int(NA_integer_, length(x))
-        ind <- nzchar(x)
-        y[ind] <- strtoi(x[ind], 16L)
-        y
-    }
-} else {
-    function(x) {
-        y <- rep.int(NA_integer_, length(x))
-        re <- "^(0x)?([0123456789abcdeABCDEF]+)$"
-        ind <- grepl(re, x)
-        y[ind] <-
-            as.integer(sapply(parse(text = sub(re, "0x\\2", x[ind])),
-                              eval))
-        
-        y
-    }
+hex <- 
+function(x)
+{
+    y <- rep.int(NA_integer_, length(x))
+    ind <- nzchar(x)
+    y[ind] <- strtoi(x[ind], 16L)
+    y
 }
 
 ## Unicode codespace ranges from U+0000 to U+10FFFF.

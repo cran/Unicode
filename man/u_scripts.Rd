@@ -28,6 +28,6 @@ u_scripts(x)
 scripts <- u_scripts()
 names(scripts)
 ## Total number of code points assigned to the scripts:
-sort(sapply(scripts, function(s) sum(n_of_u_chars(s))),
+sort(vapply(scripts, function(s) sum(n_of_u_chars(s)), 0),
      decreasing = TRUE)
 }

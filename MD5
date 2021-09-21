@@ -1,14 +1,14 @@
-7600219bbd537f973127c1d251616d3d *DESCRIPTION
+5a80886803ee4190af882691ab05dd39 *DESCRIPTION
 b51babd99f0e286d19624261cb5df830 *NAMESPACE
-d39a50e46eb76e9ac3e91f623646efe6 *R/basics.R
+ca917f392ca64d226b9913de452c4fdd *R/basics.R
 f0e3ec14b774b82b7957f0d984b4d9c8 *R/casefuns.R
-e12c0738451992df3b79b6514caf81e3 *R/charfuns.R
+fdd82f9a869182da3cbb9f376e2d7f37 *R/charfuns.R
 7a86b8f12a01a9c25f53a226bc816afa *R/strfuns.R
-1cc172f53f5962b235947f098fd6afff *R/sysdata.rda
+9f2e59e1535d28901ee49e6e8903a929 *R/sysdata.rda
 2af14e6801f0b7797dc39b41cd496cd5 *R/ucdmisc.R
 674bd2899060120db4f8849a19bd0151 *inst/po/en@quot/LC_MESSAGES/R-Unicode.mo
-c5f047ac996114b31fa759b57e266780 *man/casefuns.Rd
-06b7a306def215a0ba916dca2ec37bd4 *man/n_of_u_chars.Rd
+f28353a3bd5cefba5dedfcd7a7beab7d *man/casefuns.Rd
+077c47081c5872b79c70a6beb676ed32 *man/n_of_u_chars.Rd
 3c4ba30e560cf9fa0528c97239fc2822 *man/tokenizers.Rd
 134b17bb183bc590ccd60fb4970fb68b *man/u_blocks.Rd
 dc71f002a4a66f4ab00001da9a35d7e5 *man/u_char_basics.Rd
@@ -17,5 +17,5 @@ dc71f002a4a66f4ab00001da9a35d7e5 *man/u_char_basics.Rd
 8fd05d0fa55dd8a5635f489e87ff4ed1 *man/u_char_names.Rd
 5bcbea6b0ca6872c83b72e38d6a56071 *man/u_char_properties.Rd
 7c83ccaf764d956fd68d222f79b337ea *man/u_named_sequences.Rd
-8ff9bc7c4b7aaeca42e2e58aaab34ed7 *man/u_scripts.Rd
+e328606be1832461ced5b2676de8571b *man/u_scripts.Rd
 63fd21d338b24b18042b3fbffeb9ed66 *po/R-Unicode.pot
