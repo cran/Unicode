@@ -1,10 +1,10 @@
-5a80886803ee4190af882691ab05dd39 *DESCRIPTION
+1b359566d1b051530decea528cbaa600 *DESCRIPTION
 b51babd99f0e286d19624261cb5df830 *NAMESPACE
-ca917f392ca64d226b9913de452c4fdd *R/basics.R
+4f8b7d405c8e6f70025a3cecd52669a9 *R/basics.R
 f0e3ec14b774b82b7957f0d984b4d9c8 *R/casefuns.R
-fdd82f9a869182da3cbb9f376e2d7f37 *R/charfuns.R
+4b88bd4c98482776ddc3c126d52193de *R/charfuns.R
 7a86b8f12a01a9c25f53a226bc816afa *R/strfuns.R
-9f2e59e1535d28901ee49e6e8903a929 *R/sysdata.rda
+44345f0bf88272854c354a675b369c37 *R/sysdata.rda
 2af14e6801f0b7797dc39b41cd496cd5 *R/ucdmisc.R
 674bd2899060120db4f8849a19bd0151 *inst/po/en@quot/LC_MESSAGES/R-Unicode.mo
 f28353a3bd5cefba5dedfcd7a7beab7d *man/casefuns.Rd

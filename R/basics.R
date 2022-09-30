@@ -305,7 +305,7 @@ function(x, table, nomatch = NA_integer_)
     cps <- unlist(table)
     lo <- cps[lpos]
     hi <- cps[hpos]
-    pos <- which(outer(x, lo, ">=") & outer(x, hi, "<="),
+    pos <- which(outer(x, lo, `>=`) & outer(x, hi, `<=`),
                  arr.ind = TRUE)
     ind <- seq_len(nrow(pos))
     y[pos[ind, 1L]] <- pos[ind, 2L]

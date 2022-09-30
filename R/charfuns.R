@@ -44,7 +44,7 @@ function(s)
         L <- Jamo_L_base + s %/% Jamo_N_count
         V <- Jamo_V_base + (s %% Jamo_N_count) %/% Jamo_T_count
         T <- Jamo_T_base + s %% Jamo_T_count
-        y[ok] <- Map("c", L, V, ifelse(T == Jamo_T_base, list(NULL), T))
+        y[ok] <- Map(c, L, V, ifelse(T == Jamo_T_base, list(NULL), T))
     }
     as.u_char_seq(y)
 }
